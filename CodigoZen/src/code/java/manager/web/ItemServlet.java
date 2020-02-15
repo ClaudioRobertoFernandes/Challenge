@@ -40,7 +40,6 @@ public class ItemServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getServletPath();
-
 		switch (action) {
 		case "/new":
 			formCadastro(request, response);
@@ -59,6 +58,7 @@ public class ItemServlet extends HttpServlet {
 			break;
 		default:
 			listItem(request, response);
+			break;
 		}
 	}
 
@@ -67,11 +67,14 @@ public class ItemServlet extends HttpServlet {
 	 * 
 	 * @throws SQLException
 	 * @throws IOException
+	 * @throws ServletException 
 	 */
-	private void formDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void formDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		itemDao.deleteItem(id);
-		response.sendRedirect("/WEB-INF/lista");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/lista");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -79,15 +82,18 @@ public class ItemServlet extends HttpServlet {
 	 * 
 	 * @throws SQLException
 	 * @throws IOException
+	 * @throws ServletException 
 	 */
-	private void formUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void formUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");	
 		String vehicleAply = request.getParameter("vehicle");
 		Float pesoLiquido = Float.parseFloat(request.getParameter("netWeight"));
 		Float pesoBruto = Float.parseFloat(request.getParameter("grossWeight"));
 		itemDao.updateItem(new Item(id, name, vehicleAply, pesoLiquido, pesoBruto));
-		response.sendRedirect("/WEB-INF/lista");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/lista");
+		dispatcher.forward(request, response);
+		
 	}
 
 	/**
@@ -110,15 +116,17 @@ public class ItemServlet extends HttpServlet {
 	 * Formulario para inserir novo item
 	 * 
 	 * @throws IOException
+	 * @throws ServletException 
 	 */
-	private void insertItem(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void insertItem(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String name = request.getParameter("name");	
 		String vehicleAply = request.getParameter("vehicle");
 		Float pesoLiquido = Float.parseFloat(request.getParameter("netWeight"));
 		Float pesoBruto = Float.parseFloat(request.getParameter("grossWeight"));
 		Item novoItem = new Item(name, vehicleAply, pesoLiquido, pesoBruto);
 		itemDao.insertItem(novoItem);
-		response.sendRedirect("/WEB-INF/lista");
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/lista");
+		dispatcher.forward(request, response);
 
 	}
 

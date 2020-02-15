@@ -9,12 +9,12 @@
 	<center>
 		<h1>Lista de Peças</h1>
 		<h2>
-			<a href="new">Adicionar novo item</a> &nbsp;&nbsp;&nbsp;&nbsp; <a
-				href="list">Listar todas os itens</a>
+			<a href="new">Adicionar novo item</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+			<a href="list">Listar todas os itens</a>
 		</h2>
 	</center>
 	<div align="center">
-		<table>
+		<table border="1" cellpadding="5">
 			<caption>
 				<h2>Lista de Peças</h2>
 			</caption>
@@ -32,9 +32,10 @@
 					<td><c:out value="${itens.vehicleAply}" /></td>
 					<td><c:out value="${itens.pesoLiquido}" /></td>
 					<td><c:out value="${itens.pesoBruto}" /></td>
-					<td><a href="editar?id=<c:out value='${itens.id}' />">Editar</a>
+					<td>
+					<a href="editar?id=<c:out value='${itens.id}' />">Editar</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; 
-						<a href="deletar?id=<c:out value='${itens.id}' />">Deletar</a></td>
+					<a href="deletar?id=<c:out value='${itens.id}' />">Deletar</a></td>
 				</tr>
 			</c:forEach>
 		</table>

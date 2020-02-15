@@ -1,10 +1,8 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <title>Desafio Zen</title>
 </head>
 <body>
@@ -29,14 +27,9 @@
 					<c:if test="${item == null }">Adicionar novo item</c:if>
 				</h2>
 			</caption>
-			<%-- <c:if test="${item!=null }">
-				<input type="text" name="id"  value="<c:out value='${item.id}' />" />
-			</c:if> --%>
-			<tr>
-				<th>Id:</th>
-				<td><input type="text" name="id" size="100"
-					value="<c:out value='${item.id}'/>" /></td>
-			</tr>
+			<c:if test="${item!=null }">
+				<input type="text" name="id" value="<c:out value='${item.id}' />" />
+			</c:if>
 			<tr>
 				<th>Item:</th>
 				<td><input type="text" name="name" size="100"
@@ -59,9 +52,10 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
-					value="Salvar" /></td>
+					value="Salvar"/>
+					</td>
 			</tr>
-
+			
 		</table>
 	</div>
 
