@@ -1,0 +1,14 @@
+drop table if exists Produto;
+
+/*==============================================================*/
+/* Table: Produto                                               */
+/*==============================================================*/
+create table Produto 
+(
+   Id                   int                            not null auto_incremet,
+   Name                 varchar(200)                   not null,
+   Vehicleapplication   varchar(200)                   not null,
+   NetWeight            decimal(4,2)                   not null,
+   GrossWeight          decimal(4,2)                   not null,
+   constraint PK_PRODUTO primary key clustered (Id)
+);
