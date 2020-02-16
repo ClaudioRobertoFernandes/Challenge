@@ -31,8 +31,8 @@
 							<tr>
 								<th class="text-dark" scope="col">Id:</th>
 								<th class="text-dark" scope="col">Nome:</th>
-								<th class="text-dark" scope="col">Veiculo de Aplicação:</th>
-								<th class="text-dark" scope="col">Peso Liquido:</th>
+								<th class="text-dark" scope="col">Veículo de Aplicação:</th>
+								<th class="text-dark" scope="col">Peso Líquido:</th>
 								<th class="text-dark" scope="col">Peso Bruto:</th>
 								<th class="text-dark" scope="col">Ações:</th>
 							</tr>

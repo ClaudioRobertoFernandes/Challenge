@@ -32,12 +32,13 @@ public class ItemDao {
 		 */
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERTITEM)) {
+			
 			preparedStatement.setString(1, item.getName());
 			preparedStatement.setString(2, item.getVehicleAply());
 			preparedStatement.setFloat(3, item.getPesoLiquido());
 			preparedStatement.setFloat(4, item.getPesoBruto());
 			preparedStatement.executeUpdate();
-
+		
 		} catch (Exception e) {
 			System.err.println(e.getLocalizedMessage());
 		}
@@ -54,13 +55,14 @@ public class ItemDao {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
+
 				int id = resultSet.getInt("Id");
 				String name = resultSet.getString("Name");
 				String vehicleAply = resultSet.getString("Vehicleapplication");
 				float pesoLiquido = resultSet.getFloat("NetWeight");
 				float pesoBruto = resultSet.getFloat("GrossWeight");
 
-				item = new Item(id ,name, vehicleAply, pesoLiquido, pesoBruto);
+				item = new Item(id, name, vehicleAply, pesoLiquido, pesoBruto);
 
 			}
 		} catch (Exception e) {
@@ -73,6 +75,7 @@ public class ItemDao {
 	 * Metodo que busca todos os Itens dos banco
 	 */
 	public List<Item> selectItens() {
+		
 		List<Item> itens = new ArrayList<>();
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECTALL)) {
@@ -99,7 +102,8 @@ public class ItemDao {
 	 * @throws SQLException
 	 */
 	public boolean deleteItem(int id) {
-		boolean qtdDeleted =false;
+		
+		boolean qtdDeleted = false;
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(DELETEITEM)) {
 			preparedStatement.setInt(1, id);
@@ -115,7 +119,8 @@ public class ItemDao {
 	 * 
 	 * @throws SQLException
 	 */
-	public boolean updateItem(Item item){
+	public boolean updateItem(Item item) {
+		
 		boolean qtdUpdated = false;
 		try (Connection connection = JDBCUtils.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(UPDATEITEM)) {
@@ -126,7 +131,7 @@ public class ItemDao {
 			preparedStatement.setInt(5, item.getId());
 			qtdUpdated = preparedStatement.executeUpdate() > 0;
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return qtdUpdated;
