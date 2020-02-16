@@ -128,7 +128,7 @@ public class ItemServlet extends HttpServlet {
 		Float pesoBruto = Float.parseFloat(request.getParameter("grossWeight"));
 		
 		if (pesoLiquido >= pesoBruto) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formCadastro.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Error.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			Item novoItem = new Item(name, vehicleAply, pesoLiquido, pesoBruto);
