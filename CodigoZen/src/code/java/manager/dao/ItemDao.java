@@ -16,12 +16,13 @@ public class ItemDao {
 	 * Criando Constantes com os scripts Sql
 	 */
 	private static final String INSERTITEM = "INSERT INTO itens(Name, Vehicleapplication, NetWeight, GrossWeight) VALUES (?, ?, ?, ?);";
-	private static final String SELECTBYID = "SELECT Id, Name, Vehicleapplication, NetWeight, GrossWeight FROM itens WHERE Id = ? ";
-	private static final String SELECTALL = "SELECT * FROM itens";
+	private static final String SELECTBYID = "SELECT Id, Name, Vehicleapplication, NetWeight, GrossWeight FROM itens WHERE Id = ? order by Name asc";
+	private static final String SELECTALL = "SELECT * FROM itens order by Name asc";
 	private static final String DELETEITEM = "DELETE FROM itens WHERE Id =?;";
 	private static final String UPDATEITEM = "UPDATE itens SET Name=?, Vehicleapplication=?, NetWeight=?, GrossWeight=? WHERE Id = ?;";
 
 	/**
+	 * 
 	 * Metodo para inserir dados
 	 */
 

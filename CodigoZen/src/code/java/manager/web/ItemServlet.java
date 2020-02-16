@@ -67,9 +67,10 @@ public class ItemServlet extends HttpServlet {
 	 * 
 	 * @throws SQLException
 	 * @throws IOException
-	 * @throws ServletException 
+	 * @throws ServletException
 	 */
-	private void formDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void formDelete(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		itemDao.deleteItem(id);
 
@@ -82,18 +83,19 @@ public class ItemServlet extends HttpServlet {
 	 * 
 	 * @throws SQLException
 	 * @throws IOException
-	 * @throws ServletException 
+	 * @throws ServletException
 	 */
-	private void formUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void formUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		String name = request.getParameter("name");	
+		String name = request.getParameter("name");
 		String vehicleAply = request.getParameter("vehicle");
 		Float pesoLiquido = Float.parseFloat(request.getParameter("netWeight"));
 		Float pesoBruto = Float.parseFloat(request.getParameter("grossWeight"));
 		itemDao.updateItem(new Item(id, name, vehicleAply, pesoLiquido, pesoBruto));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/lista");
 		dispatcher.forward(request, response);
-		
+
 	}
 
 	/**
@@ -116,18 +118,26 @@ public class ItemServlet extends HttpServlet {
 	 * Formulario para inserir novo item
 	 * 
 	 * @throws IOException
-	 * @throws ServletException 
+	 * @throws ServletException
 	 */
-	private void insertItem(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String name = request.getParameter("name");	
+	private void insertItem(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		String name = request.getParameter("name");
 		String vehicleAply = request.getParameter("vehicle");
 		Float pesoLiquido = Float.parseFloat(request.getParameter("netWeight"));
 		Float pesoBruto = Float.parseFloat(request.getParameter("grossWeight"));
-		Item novoItem = new Item(name, vehicleAply, pesoLiquido, pesoBruto);
-		itemDao.insertItem(novoItem);
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/lista");
-		dispatcher.forward(request, response);
-
+		
+		if (pesoLiquido >= pesoBruto) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formCadastro.jsp");
+			dispatcher.forward(request, response);
+		}else {
+			Item novoItem = new Item(name, vehicleAply, pesoLiquido, pesoBruto);
+			itemDao.insertItem(novoItem);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/lista");
+			dispatcher.forward(request, response);
+	
+		}
+		
 	}
 
 	/**
